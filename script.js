@@ -1,5 +1,4 @@
 //double-chained list---------------------------------
-/*
 class Node {
   constructor(value) {
     this.value = value;
@@ -26,11 +25,6 @@ class List {
 }
 
 let list = new List();
-
-let node1 = new Node(1);
-let node2 = new Node(2);
-let node3 = new Node(3);
-*/
 
 //hash table-----------------------------------------
 
@@ -210,3 +204,10 @@ tree.add("Relinquished", 0);
 
 console.log(tree);
 */
+
+const construct = {
+  Node,
+  List,
+};
+
+export { construct };
