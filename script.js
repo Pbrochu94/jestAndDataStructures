@@ -28,7 +28,7 @@ let list = new List();
 
 //hash table-----------------------------------------
 
-/*let table = [];
+let table = [];
 
 function hash(value) {
   //hash function
@@ -51,31 +51,6 @@ function hash(value) {
   }
   table[index] = value;
 }
-
-let person1 = {
-  name: "Petrick",
-};
-
-let person2 = {
-  name: "Delphine",
-};
-
-let person3 = {
-  name: "Kyky",
-};
-
-let person4 = {
-  name: "Michel",
-};
-
-let person5 = {
-  name: "Philipe",
-};
-
-let person6 = {
-  name: "Patrick",
-};
-*/
 
 //Selection sort--------------------
 /*
@@ -150,8 +125,6 @@ function merge(leftArr, rightArr) {
 //binary search---------------------
 let newArray = sort(array);
 
-console.log(newArray);
-
 function search(arr, number) {
   if (arr == number) {
     return number;
@@ -205,9 +178,17 @@ tree.add("Relinquished", 0);
 console.log(tree);
 */
 
-const construct = {
-  Node,
-  List,
+let operations = {
+  hash,
 };
 
-export { construct };
+let database = {
+  table,
+};
+
+const construct = {
+  Node,
+  list,
+};
+
+export { construct, operations, database };
