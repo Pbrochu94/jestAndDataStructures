@@ -40,7 +40,11 @@ function hash(value) {
     }
     let arrayLength = table[index].length;
     for (let i = 0; i < arrayLength; i++) {
-      if (value.name.charCodeAt(1) < table[index][i].name.charCodeAt(1)) {
+      if (!value.name.charCodeAt(i) || !table[index][i].name.charCodeAt(i)) {
+        console.log("byebye");
+        return;
+      }
+      if (value.name.charCodeAt(i) < table[index][i].name.charCodeAt(i)) {
         table[index].unshift(value);
         return;
       } else {

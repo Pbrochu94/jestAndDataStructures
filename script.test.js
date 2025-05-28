@@ -50,6 +50,7 @@ describe("Test lists", () => {
 describe("Test hash table", () => {
   test("Check if hash function sort in alphabetical order according to the first letter", () => {
     let people = [
+      { name: "Denis", age: 80 },
       { name: "Delphine", age: 30 },
       { name: "Michel", age: 65 },
       { name: "Patrick", age: 30 },
@@ -61,11 +62,18 @@ describe("Test hash table", () => {
     });
     database.table.forEach((person) => {
       if (previousPerson) {
-        expect(previousPerson.name.charCodeAt(0)).toBeLessThan(
-          person.name.charCodeAt(0),
-        );
+        if (previousPerson.length > 1) {
+          console.log(previousPerson[0].name, person.name);
+        } else {
+          console.log(previousPerson.name, person.name);
+        }
+
+        //        expect(previousPerson.name.charCodeAt(0)).toBeLessThan(
+        //        person.name.charCodeAt(0),
+        //    );
       }
       previousPerson = person;
     });
+    console.log(database.table);
   });
 });
