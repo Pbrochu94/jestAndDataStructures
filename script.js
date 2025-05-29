@@ -39,17 +39,17 @@ function hash(value) {
       table[index] = [table[index]];
     }
     let arrayLength = table[index].length;
+    let wordLength = value.name.length;
     for (let i = 0; i < arrayLength; i++) {
-      if (!value.name.charCodeAt(i) || !table[index][i].name.charCodeAt(i)) {
-        console.log("byebye");
-        return;
-      }
-      if (value.name.charCodeAt(i) < table[index][i].name.charCodeAt(i)) {
-        table[index].unshift(value);
-        return;
-      } else {
-        table[index].push(value);
-        return;
+      for (let x = 0; x < wordLength; x++) {
+        if (!value.name.charCodeAt(x) || !table[index][i].name.charCodeAt(x)) {
+          table[index].unshift(value);
+          return;
+        }
+        if (value.name.charCodeAt(x) < table[index][i].name.charCodeAt(x)) {
+          table[index].unshift(value);
+          return;
+        }
       }
     }
   }
@@ -57,8 +57,8 @@ function hash(value) {
 }
 
 //Selection sort--------------------
-/*
-let array = [11, 23, 8, 14, 30, 9, 6, 17, 22, 28, 25, 15, 7, 10, 19];
+
+let sortArr = [11, 23, 8, 14, 30, 9, 6, 17, 22, 28, 25, 15, 7, 10, 19];
 
 function sort(arr) {
   let length = arr.length;
@@ -72,11 +72,6 @@ function sort(arr) {
     }
   }
 }
-
-console.log(array);
-sort(array);
-console.log(array);
-*/
 //bubble sort----------------------
 /*
 let array = [11, 23, 8, 14, 30, 9, 6, 17, 22, 28, 25, 15, 7, 10, 19];
@@ -103,14 +98,14 @@ console.log(array);
 
 let array = [11, 23, 8, 14, 30, 9, 6, 17, 22, 28, 25, 15, 7, 10, 19];
 
-function sort(arr) {
+function mergeSort(arr) {
   if (arr.length <= 1) {
     return arr;
   }
   let middle = Math.ceil(arr.length / 2);
   let leftSide = arr.splice(0, middle);
   let rightSide = arr;
-  return merge(sort(leftSide), sort(rightSide));
+  return merge(mergeSort(leftSide), mergeSort(rightSide));
 }
 
 function merge(leftArr, rightArr) {
@@ -127,13 +122,20 @@ function merge(leftArr, rightArr) {
 }
 
 //binary search---------------------
-let newArray = sort(array);
 
-function search(arr, number) {
-  if (arr == number) {
+function binarySearch(arr, number) {
+  let midIndex = Math.floor(arr.length / 2);
+  if (arr[midIndex] === number) {
     return number;
   }
-  let midIndex = Math.ceil(arr.length / 2);
+  if (arr.length === 1 && arr !== number) {
+    return "Number not found";
+  }
+  if (number < arr[midIndex]) {
+    return binarySearch(arr.slice(0, midIndex), number);
+  } else {
+    return binarySearch(arr.slice(midIndex, arr.length), number);
+  }
 }
 
 //Binary tree-----------------------
@@ -184,10 +186,13 @@ console.log(tree);
 
 let operations = {
   hash,
+  sort,
+  binarySearch,
 };
 
 let database = {
   table,
+  sortArr,
 };
 
 const construct = {

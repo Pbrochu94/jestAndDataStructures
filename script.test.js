@@ -49,6 +49,22 @@ describe("Test lists", () => {
 
 describe("Test hash table", () => {
   test("Check if hash function sort in alphabetical order according to the first letter", () => {
+    let mockCheckAlphaOrder = jest.fn((firstName, secondName) => {
+      let length = firstName.length;
+      let result = true;
+      for (let i = 0; i < length; i++) {
+        if (!secondName[i] || !firstName[i]) {
+          return result;
+        }
+        if (secondName[i] > firstName[i]) {
+          return true;
+        }
+        if (secondName[i] < firstName[i]) {
+          return false;
+        }
+        return;
+      }
+    });
     let people = [
       { name: "Denis", age: 80 },
       { name: "Delphine", age: 30 },
@@ -63,17 +79,39 @@ describe("Test hash table", () => {
     database.table.forEach((person) => {
       if (previousPerson) {
         if (previousPerson.length > 1) {
-          console.log(previousPerson[0].name, person.name);
+          expect(
+            mockCheckAlphaOrder(previousPerson[0].name, person.name),
+          ).toBeTruthy();
         } else {
-          console.log(previousPerson.name, person.name);
+          expect(
+            mockCheckAlphaOrder(previousPerson.name, person.name),
+          ).toBeTruthy();
         }
-
-        //        expect(previousPerson.name.charCodeAt(0)).toBeLessThan(
-        //        person.name.charCodeAt(0),
-        //    );
       }
       previousPerson = person;
     });
-    console.log(database.table);
+  });
+});
+describe("Test selection sort algorithm", () => {
+  test("Numbers are in order from smallest to biggest", () => {
+    console.log(database.sortArr);
+    let mockCheckOrder = jest.fn((array) => {
+      array.forEach((number) => {
+        console.log(number);
+      });
+    });
+  });
+});
+describe("Test binary search", () => {
+  let sortedArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  test("If number is found in array", () => {
+    sortedArr.forEach((number) => {
+      expect(operations.binarySearch(sortedArr, number)).toBe(number);
+    });
+  });
+  test("If number not in array returns `Number not found`", () => {
+    for (let i = 11; i < 20; i++) {
+      expect(operations.binarySearch(sortedArr, i)).toBe("Number not found");
+    }
   });
 });
